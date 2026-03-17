@@ -1,19 +1,27 @@
-README.md creado exitosamente para CPP-MODULE-07. Incluye:
+<div align="center">
 
-- Badges: C++98, Templates, Memory Management, Exception Safety, 42 School
-- Descripción centrada en el dominio de templates genéricos
-- Features: Function Templates, Iterator Genérico, Array Class Template con RAII
-- Arquitectura Mermaid mostrando los 3 ejercicios y su relación con Generic Programming
-- Guía de instalación con comandos make para cada ejercicio
-- Sección de contacto conenlaces a GitHub y LinkedIn
- en el dominio de **Templates en C++**, desarrollando componentes genéricos type-safe que demuestran comprensión profunda de metaprogramación, gestión de memoria y las mejores prácticas del lenguaje.
+# CPP Module 07 - C++ Templates
+
+[![C++98](https://img.shields.io/badge/C%2B%2B-98-00599C?logo=c%2B%2B&logoColor=white)](https://isocpp.org/)
+[![Templates](https://img.shields.io/badge/Paradigm-Generic_Programming-blue)](https://en.cppreference.com/w/cpp/language/templates)
+[![Memory Management](https://img.shields.io/badge/Pattern-RAII-green)](https://en.cppreference.com/w/cpp/language/raii)
+[![42School](https://img.shields.io/badge/School-42-000000?logo=42)](https://42.fr/)
+
+</div>
+
+Implementación avanzada de **Templates C++** desarrollando componentes genéricos type-safe que demuestran dominio de metaprogramación, gestión de memoria RAII y las mejores prácticas del lenguaje.
+
+---
 
 ## Características Principales
 
-- **Function Templates**: Implementación de `swap`, `min` y `max` genéricos que operan con cualquier tipo comparable
-- **Iterador Genérico**: Función `iter` que aplica callbacks a cada elemento de un array sin importar su tipo
-- **Template Class Array**: Container genérico con gestión de memoria RAII, bounds checking y Orthodox Canonical Form completo
+- **Function Templates**: Implementación genérica de `swap`, `min` y `max` que operan con cualquier tipo comparable
+- **Iterator Template**: Función `iter` que aplica callbacks a arrays sin importar su tipo subyacente
+- **Class Template Array**: Container genérico con gestión de memoria automática (RAII) y bounds checking
+- **Orthodox Canonical Form**: Copy constructor, assignment operator y destructor implementados correctamente
 - **Exception Safety**: Manejo robusto de out-of-bounds mediante `std::out_of_range`
+
+---
 
 ## Stack Tecnológico
 
@@ -22,44 +30,50 @@ README.md creado exitosamente para CPP-MODULE-07. Incluye:
 | Lenguaje | C++98 |
 | Compilador | c++ (clang/g++) |
 | Paradigma | Generic Programming / Metaprogramming |
-| Funcionalidades | Templates, RAII, Exceptions, Operator Overloading |
+| Memoria | RAII (Resource Acquisition Is Initialization) |
+| Safety | Exception Handling, Bounds Checking |
+
+---
 
 ## Decisiones Técnicas
 
-El proyecto implementa templates siguiendo el estándar C++98 para garantizar máxima portabilidad. La separación de declaración (`Array.hpp`) e implementación (`Array.tpp`) en templates demuestra comprensión del modelo de compilación de C++. El uso de RAII para gestión automática de memoria previene leaks, mientras que el bounds checking con excepciones proporciona seguridad sin sacrificar rendimiento. El Orthodox Canonical Form asegura semántica de copia correcta, fundamental para containers genéricos.
+El proyecto implementa templates siguiendo el estándar **C++98** para garantizar máxima portabilidad y compatibilidad. La separación de declaración (`Array.hpp`) e implementación (`Array.tpp`) en templates demuestra comprensión profunda del **modelo de compilación de C++**. El patrón RAII previene memory leaks de forma automática, mientras que el bounds checking con excepciones proporciona **seguridad en tiempo de ejecución** sin sacrificar performance. El Orthodox Canonical Form asegura semántica de copia correcta (deep copy), fundamental para containers genéricos que gestionan memoria dinámica.
+
+---
 
 ## Arquitectura
 
 ```mermaid
 flowchart TB
-    subgraph Ex00["Exercise 00: Function Templates"]
-        A[whatever.h] --> B["swap&lt;T&gt;(a, b)"]
-        A --> C["min&lt;T&gt;(a, b)"]
-        A --> D["max&lt;T&gt;(a, b)"]
-        B --> E["Type-safe generic swap"]
-        C --> F["Type-safe comparison"]
-        D --> F
+    subgraph EX00["ex00: Function Templates"]
+        WH["whatever.h"]
+        WH --> SW["swap&lt;T&gt;(a, b)"]
+        WH --> MN["min&lt;T&gt;(a, b)"]
+        WH --> MX["max&lt;T&gt;(a, b)"]
     end
 
-    subgraph Ex01["Exercise 01: Iterator Template"]
-        G[iter.h] --> H["iter&lt;T, F&gt;(array, len, func)"]
-        H --> I["Applies function to each element"]
-        I --> J["Works with any callable"]
+    subgraph EX01["ex01: Iterator Template"]
+        IT["iter.h"]
+        IT --> FN["iter&lt;T, F&gt;(arr, len, func)"]
+        FN --> CB["Callback por elemento"]
     end
 
-    subgraph Ex02["Exercise 02: Class Template"]
-        K[Array.hpp] --> L["Array&lt;T&gt;"]
-        L --> M["RAII Memory Management"]
-        L --> N["operator[] with bounds check"]
-        L --> O["Copy/Assignment semantics"]
+    subgraph EX02["ex02: Class Template"]
+        AH["Array.hpp"]
+        AT["Array.tpp"]
+        AH --> AT
+        AT --> CT["Constructor / Destructor"]
+        AT --> CC["Copy / Assignment"]
+        AT --> OP["operator[] + bounds check"]
     end
 
-    Ex00 --> P["Generic Programming Foundation"]
-    Ex01 --> P
-    Ex02 --> Q["Template Class Mastery"]
-    P --> R["Type-safe, Reusable Components"]
-    Q --> R
+    EX00 --> GP["Generic Programming"]
+    EX01 --> GP
+    EX02 --> GP
+    GP --> TS["Type-Safe Components"]
 ```
+
+---
 
 ## Estructura del Proyecto
 
@@ -68,17 +82,19 @@ CPP-MODULE-07/
 ├── ex00/
 │   ├── Makefile
 │   ├── main.cpp
-│   └── whatever.h        # Function templates: swap, min, max
+│   └── whatever.h          # Function templates: swap, min, max
 ├── ex01/
 │   ├── Makefile
 │   ├── main.cpp
-│   └── iter.h            # Generic iterator template
+│   └── iter.h              # Generic iterator template
 └── ex02/
     ├── Makefile
     ├── main.cpp
-    ├── Array.hpp         # Array template declaration
-    └── Array.tpp         # Array template implementation
+    ├── Array.hpp           # Array template declaration
+    └── Array.tpp           # Array template implementation
 ```
+
+---
 
 ## Instalación y Ejecución
 
@@ -87,49 +103,66 @@ CPP-MODULE-07/
 git clone https://github.com/samuelhm/CPP-MODULE-07.git
 cd CPP-MODULE-07
 
-# Ejecutar Exercise 00 (Function Templates)
+# Exercise 00 - Function Templates
 cd ex00 && make && ./Template
 
-# Ejecutar Exercise 01 (Iterator Template)
+# Exercise 01 - Iterator Template  
 cd ../ex01 && make && ./Iter
 
-# Ejecutar Exercise 02 (Array Class Template)
+# Exercise 02 - Array Class Template
 cd ../ex02 && make && ./Arr
 ```
+
+---
 
 ## Ejemplos de Uso
 
 ```cpp
-// Function templates
+// Function templates - tipos deducidos automáticamente
 int a = 2, b = 3;
-swap(a, b);        // a=3, b=2
-min(a, b);         // returns 2
+swap(a, b);              // a=3, b=2
+min(a, b);               // returns 2
+max(a, b);               // returns 3
 
-// Iterator template
+// Iterator template - aplica función a cada elemento
 int arr[] = {1, 2, 3, 4, 5};
-iter(arr, 5, printElement<int>);
+iter(arr, 5, printElement<int>);    // Imprime cada elemento
 
-// Array class template
-Array<std::string> strArray(5);
-strArray[0] = "Hello";
-std::cout << strArray.size();  // 5
+// Array class template - container genérico con RAII
+Array<std::string> names(5);
+names[0] = "Hello";
+std::cout << names.size();          // 5
+// Excepción si: names[10]           → std::out_of_range
 ```
-
-## Aprendizajes Clave
-
-- **Type Deduction**: Comprensión de cómo el compilador deduce tipos en templates
-- **Template Instantiation**: Separación de declaración e implementación
-- **RAII Pattern**: Gestión automática de recursos con constructores/destructores
-- **Deep Copy Semantics**: Implementación correcta de copy constructor y assignment operator
-- **Exception Handling**: Uso de excepciones estándar para errores en tiempo de ejecución
 
 ---
 
-## Contacto
+## Aprendizajes Clave
+
+| Concepto | Descripción |
+|----------|-------------|
+| Type Deduction | Compilador deduce tipos automáticamente en templates |
+| Template Instantiation | Separación declaración/implementación para headers |
+| RAII Pattern | Gestión automática de recursos via constructor/destructor |
+| Deep Copy Semantics | Copy constructor y assignment operator correctos |
+| Exception Handling | Uso de `std::out_of_range` para errores runtime |
+
+---
+
+## Testeos y Validaciones
+
+- Compilación con flags estrictos: `-Wall -Werror -Wextra -pedantic`
+- Sanitizer Address habilitado: `-fsanitize=address`
+- Tests con tipos primitivos (`int`, `double`) y complejos (`std::string`)
+- Validación de bounds checking y excepciones
+
+---
 
 <div align="center">
 
-[![GitHub](https://img.shields.io/badge/GitHub-samuelhm-181717?logo=github)](https://github.com/samuelhm/)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-shurtado--m-0A66C2?logo=linkedin)](https://www.linkedin.com/in/shurtado-m/)
+## Contacto
+
+[![GitHub](https://img.shields.io/badge/GitHub-samuelhm-181717?style=for-the-badge&logo=github)](https://github.com/samuelhm/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-shurtado--m-0A66C2?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/shurtado-m/)
 
 </div>
